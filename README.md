@@ -35,8 +35,14 @@ SEL selector = NSSelectorFromString(@"getDataList");
 
 [vc performSelector:selector];
 
-4.
 
+4.代理-设计模式
+
+iOS中消息传递方式：通知、代理、block、target action、KVO；
+
+其中代理如tableview，由@Protocol，委托方(tableview)，代理方(当前viewcontroller)组成；
+
+5、
 
 
 
