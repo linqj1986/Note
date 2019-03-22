@@ -1,4 +1,3 @@
-# Note
 
 # 1.AOP-面向切面编程
 
@@ -40,25 +39,21 @@ iOS中消息传递方式：通知、代理、block、target action、KVO；
 
 # 5.定时器
 
-GCD:
+## GCD:
 
 dispatch_source_t
 
 dispatch_source_set_timer
 
-NSTimer:
+## NSTimer:
 
-####
-
-一种方式是主线程中进行NSTimer操作，使用NSRunLoopCommonModes，防止主线程的runloop切换到其他模式导致timer失效。
+### 一种方式是主线程中进行NSTimer操作，使用NSRunLoopCommonModes，防止主线程的runloop切换到其他模式导致timer失效。
 
 NSTimer *timer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(timer:) userInfo:nil repeats:YES];
 
 [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
 
-####
-
-一种方式是创建子线程，使用子线程的runloop
+### 一种方式是创建子线程，使用子线程的runloop
 
 NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(newThread) object:nil];
 
@@ -68,7 +63,7 @@ NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(newT
 
 [[NSRunLoop currentRunLoop] run];
 
-6.
+# 6.
 
 
 
