@@ -48,17 +48,21 @@ dispatch_source_set_timer
 ## NSTimer:
 
 * 一种方式是主线程中进行NSTimer操作，使用NSRunLoopCommonModes，防止主线程的runloop切换到其他模式导致timer失效。
+
 '''
  NSTimer *timer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(timer:) userInfo:nil repeats:YES];
  [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
 '''
+
 * 一种方式是创建子线程，使用子线程的runloop（每个线程都有一个自己的runloop）
-'''
+
+‘’‘
  NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(newThread) object:nil];
  在newThread函数中;
  [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(addTime) userInfo:nil repeats:YES];
  [[NSRunLoop currentRunLoop] run];
-'''
+’‘’
+
 # 6.
 
 
