@@ -30,11 +30,51 @@ SEL selector = NSSelectorFromString(@"getDataList");
 [vc performSelector:selector];
 ```
 
-# 4.代理-设计模式
+# 4.消息传递方式
 
-iOS中消息传递方式：通知、代理、block、target action、KVO；
+## 通知
+```
+//添加对登录情况的观察
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:@"login" object:nil];
 
-其中代理如tableview，由@Protocol，委托方(tableview)，代理方(当前viewcontroller)组成；
+//发送通知
+[[NSNotificationCenter defaultCenter] postNotificationName:@"login" object:nil];
+```
+## block
+
+## target action
+
+## KVO(观察者模式)
+
+* 应用AOP技术，自动为被观察对象创造一个派生类，并将被观察对象的isa 指向这个派生类。对派生类的方法进行了override，并添加了通知代码。
+```
+//案例：AFNetWorking库对下载进度的观察
+//添加对进度的观察
+NSProgress *progress；
+[progress addObserver:self
+           forKeyPath:NSStringFromSelector(@selector(fractionCompleted))
+              options:NSKeyValueObservingOptionNew
+              context:NULL];
+              
+//实现observeValueForKeyPath方法捕获通知
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+   if ([object isEqual:self.downloadProgress]) {
+        if (self.downloadProgressBlock) {
+            self.downloadProgressBlock(object);
+        }
+    }
+    else if ([object isEqual:self.uploadProgress]) {
+        if (self.uploadProgressBlock) {
+            self.uploadProgressBlock(object);
+        }
+    }
+}
+```
+
+* 代理（设计模式）
+```
+比如tableview，由@Protocol，委托方(tableview)，代理方(当前viewcontroller)组成；
+```
 
 # 5.定时器
 
