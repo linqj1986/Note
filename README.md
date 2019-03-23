@@ -97,10 +97,77 @@ void uncaughtExceptionHandler(NSException *exception) {
 }
 ```
 
+# 7.数据存储
+
+## CoreData
+
+* CoreData.framework对原始SQLite数据库API访问的封装
+
+## NSUserDefaults
+
+* 存储NSxxx类型
+```
+[[NSUserDefaults standardUserDefaults] setObject:@"admin"forKey:@"user_name"];
+```
+* 存储其他系统类型需要转换成NSData存储
+```
+NSData *objColor = [NSKeyedArchiver archivedDataWithRootObject:[UIColor redColor]];
+[[NSUserDefaults standardUserDefaults] setObject:objColor forKey:@"myColor"];
+```
+* 存储自定义结构体需要实现NSCoding协议
 
 
+# 8. 模型与字典数组的转化
 
+```
+MJ框架与KVC的底层实现不同点:
 
+1 KVC是通过遍历字典中的所有key,然后去模型中寻找对应的属性.
+
+2 MJ框架是通过先遍历模型中的属性,然后去字典中寻找对应的key,所以用MJ框架的时候,模型中的属性和字典可以不用一一对应,同样能达到给模型赋值的效果.
+```
+
+## KVC(key value coding)
+
+```
+//模型
+@interface Person : NSObject
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, assign) NSInteger age;
+@end
+
+//转化
+NSDictionary *dic = @{@"name":@"revon", @"age":@"19"};
+Person *p = [Person setValuesForKeysWithDictionary:dic];
+```
+
+## MJExtension
+
+* 模型Person中，有一个数组，数组里边，装的就是Person对象
+```
+@interface Person : NSObject
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, assign) NSInteger age;
+@property (nonatomic, strong) NSArray *stuarray;
+@end
+
++ (NSDictionary *)mj_objectClassInArray{
+    return @{@"stuarray" : @"Person"};//前边，是属性数组的名字，后边就是类名
+}
+
+//转化
+NSDictionary *dic = @{@"name" : @"a",
+                          @"stuarray" : @[@{@"name" : @"b", @"age" : @"18"}, @{@"name" : @"c", @"age" : @"140"}]};
+Person *p = [Person mj_objectWithKeyValues:dic];
+```
+
+* 数组直接转为模型
+```
+//data.decryptData是一个数组array
+//NSMutableArray *array = @[@{@"name" : @"b", @"age" : @"18"}, @{@"name" : @"c", @"age" : @"140"}];
+NSMutableArray<Person *> *persionList = [[NSMutableArray alloc] init];
+persionList = [Person mj_objectArrayWithKeyValuesArray:data.decryptData];
+```
 
 
 
