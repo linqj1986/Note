@@ -71,7 +71,7 @@ NSProgress *progress；
 }
 ```
 
-* 代理（设计模式）
+## 代理（设计模式）
 ```
 比如tableview，由@Protocol，委托方(tableview)，代理方(当前viewcontroller)组成；
 ```
@@ -209,7 +209,60 @@ NSMutableArray<Person *> *persionList = [[NSMutableArray alloc] init];
 persionList = [Person mj_objectArrayWithKeyValuesArray:data.decryptData];
 ```
 
+# 9.多线程同步
 
+## 互斥锁
+
+* @synchronized（）
+```
+//函数被多线程调用时，锁定self，读取修改self的变量；
+- (void)saleTicket
+{
+    @synchronized(self) {
+        // 先取出总数
+        NSInteger count = self.ticketCount;
+        if (count > 0) {
+            self.ticketCount = count - 1;
+            NSLog(@"%@卖了一张票，还剩下%zd张", [NSThread currentThread].name, self.ticketCount);
+        } else {
+            NSLog(@"票已经卖完了");
+            break;
+        }
+    }
+}
+```
+* NSLock、NSCondition
+```
+NSLock *lock = [[NSLock alloc] init];
+[lock lock] //上锁
+[lock unlock]//解锁
+```
+
+## 栅栏
+```
+//DISPATCH_QUEUE_CONCURRENT 并行队列，非有序
+//DISPATCH_QUEUE_SERIAL 串行队列，有序
+dispatch_queue_t h264DataQueue = dispatch_queue_create("com.h264.saveArray", DISPATCH_QUEUE_CONCURRENT);
+
+//这里使用dispatch_barrier_async异步添加，不必等待代码块执行完成，防止接受message卡住，而且能保证添加入的顺序是完整的
+- (void)Thread1
+{
+    dispatch_barrier_async(self.h264DataQueue, ^{
+        [self.h264DataList addObject:message];
+    });
+}
+
+//从头部提取出数据
+- (void)Thread2
+{
+    __block NSData *message = nil;
+        dispatch_barrier_sync(self.h264DataQueue, ^{
+          message = [self.h264DataList firstObject];
+          [self.h264DataList removeObject:message];
+        });
+}
+
+```
 
 
 
