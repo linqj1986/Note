@@ -264,7 +264,19 @@ dispatch_queue_t h264DataQueue = dispatch_queue_create("com.h264.saveArray", DIS
 
 ```
 
+# 10.frame & bounds
 
+```
+ frame: 该view在父view坐标系统中的位置和大小。（参照点是，父亲的坐标系统）
+ bounds：该view在本地坐标系统中的位置和大小。（参照点是，本地坐标系统，以0,0点为起点）
+```
+
+# 11.ARC & MRR
+
+```
+ARC(Automatic Reference Counting)自动引用计数
+MRR(manual retain-release) 手动管理内存
+```
 
 
 
