@@ -282,7 +282,9 @@ MRR(manual retain-release) 手动管理内存
 
 # 12.MVC,MVP,MVVM,基于router组件方案（VIPER,蘑菇街）
 
-# 13.#import 大部分功能和#include是一样的,但是他处理了重复引用的问题,我们在引用文件的时候不用再去自己进行重复引用处理.
+# 13.#import #include
+
+    import处理了重复引用的问题，不用再去自己进行重复引用处理.
 
 # 14.成员变量和属性
 ```
