@@ -1,6 +1,8 @@
 
 # 1.AOP-面向切面编程
 
+oop - Object Oriented Programming
+aop - Aspect Oriented Programming
 设计目的：解决只有单继承的语言缺点。
 
 优点：不入侵原有代码。
@@ -278,12 +280,36 @@ ARC(Automatic Reference Counting)自动引用计数
 MRR(manual retain-release) 手动管理内存
 ```
 
+# 12.MVC,MVP,MVVM,基于router组件方案（VIPER,蘑菇街）
+
+# 13.#import 大部分功能和#include是一样的,但是他处理了重复引用的问题,我们在引用文件的时候不用再去自己进行重复引用处理.
+
+# 14.成员变量和属性
+```
+@interface Person : NSObject
+{
+    NSString *_sex;//成员变量，使用要用->，成员变量的默认修饰是@protected只能内部用。
+}
+@property (nonatomic, copy) NSString *name;//属性,最好都用属性，方便。
+@end
+```
+
+# 15.Category、extension
+```
+可以把不同的功能组织到不同的category里;
+模拟多继承（另外可以模拟多继承的还有protocol）
+```
+```
+extension可以添加实例变量，而category不可以.
+必须有一个类的源码才能为一个类添加extension
+```
 
 
-
-
-
-
+# 16.viewcontroller
+```
+viewDidLoad 这时候view已经有了，最适合创建一些附加的view和控件了。
+有一点需要注意的是，viewDidLoad会调用多次（viewcontroller可能多次载入view),最好使用懒加载，判断是否为空.
+```
 
 
 
