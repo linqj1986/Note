@@ -309,14 +309,49 @@ extension可以添加实例变量，而category不可以.
 必须有一个类的源码才能为一个类添加extension
 ```
 
-
 # 16.viewcontroller
 ```
 viewDidLoad 这时候view已经有了，最适合创建一些附加的view和控件了。
 有一点需要注意的是，viewDidLoad会调用多次（viewcontroller可能多次载入view),最好使用懒加载，判断是否为空.
 ```
 
+# 17.进程通讯方式
 
+## 1.URL Scheme
+应用场景，想要进行qq，微信，微博分享跳转功能，需在LSApplicationQueriesSchemes配置这些第三方应用，白名单。
+
+## 2.UIPasteboard
+应用场景，复制淘口令到剪切板。
+
+## 3.socket
+
+# 18.私有api
+```
+LSApplicationWorkspace
+```
+
+# 19.代码混淆
+```
+```
+
+# 20.运行时编程
+
+## 1.动态方法交换
+
+## 2.category类别添加新属性
+
+## 3.获取类的属性，方法等。
+```
+objc_getClass
+```
+
+# 21.多线程
+
+## 1.NSThread
+
+## 2.GCD
+
+## 3.NSOperationQueue
 
 
 
