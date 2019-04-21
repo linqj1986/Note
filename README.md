@@ -353,8 +353,10 @@ objc_getClass
 
 ## 3.NSOperationQueue
 
+# 22.uiviewcontroller
+    init-loadview-viewdidload-viewwillappear-viewdidappear-viewwilldisappear-viewdiddisappear-dealloc
 
-
+# 23.
 
 
 
