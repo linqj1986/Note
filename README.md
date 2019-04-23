@@ -158,6 +158,8 @@ NSData *objColor = [NSKeyedArchiver archivedDataWithRootObject:[UIColor redColor
 ```
 * 存储自定义结构体需要实现NSCoding协议
 
+## NSFileManager
+
 
 # 8. 模型与字典数组的转化
 
